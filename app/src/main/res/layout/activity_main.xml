@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#EFEBE5"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -22,14 +23,14 @@
             <ImageView
                 android:layout_width="38dp"
                 android:layout_height="30dp"
-                android:src="@drawable/img_logo_diary" />
+                android:src="@drawable/img_earth" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="나의 다이어리"
+                android:text="여담 :: 여행을 담다"
                 android:layout_marginLeft="8dp"
-                android:textColor="@color/black"
+                android:textColor="#FF7E73"
                 android:textSize="24sp"
                 android:textStyle="bold|italic" />
 
@@ -54,9 +55,10 @@
         android:layout_gravity="bottom|right"
         android:layout_marginRight="24dp"
         android:layout_marginBottom="24dp"
-        android:backgroundTint="#448AFF"
-        app:tint="@color/white"
+        android:backgroundTint="#EFEBE5"
+        app:tint="#FF7E73"
         android:src="@drawable/img_pencil" />
+
 
 
 </FrameLayout>
