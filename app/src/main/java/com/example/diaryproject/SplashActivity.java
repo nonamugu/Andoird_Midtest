@@ -23,7 +23,7 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(mainIntent);
                 finish();
             }
-        }, 1500);   // 딜레이 해주고 싶은 초를 적어야함. (1000 밀리초 = 1초)
+        }, 2000);   // 딜레이 해주고 싶은 초를 적어야함. (1000 밀리초 = 1초)
 
     }
 

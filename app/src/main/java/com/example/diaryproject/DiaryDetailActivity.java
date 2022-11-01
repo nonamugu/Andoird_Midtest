@@ -53,10 +53,10 @@ public class DiaryDetailActivity extends AppCompatActivity implements View.OnCli
         iv_check.setOnClickListener(this);          // 클릭 가능 부여
 
         // 기본으로 설정된 날씨의 값을 지정 (디바이스 현재 시간 기준)
-        mSelectedUserDate_start = new SimpleDateFormat("yyyy/MM/dd E요일", Locale.KOREA).format(new Date());
+        mSelectedUserDate_start = new SimpleDateFormat("yyyy/MM/dd (EE)", Locale.KOREA).format(new Date());
         mTvDate_start.setText(mSelectedUserDate_start);
 
-        mSelectedUserDate_end = new SimpleDateFormat("yyyy/MM/dd E요일", Locale.KOREA).format(new Date());
+        mSelectedUserDate_end = new SimpleDateFormat("yyyy/MM/dd (EE)", Locale.KOREA).format(new Date());
         mTvDate_end.setText(mSelectedUserDate_end);
 
     }
@@ -121,7 +121,7 @@ public class DiaryDetailActivity extends AppCompatActivity implements View.OnCli
                         innerCal.set(Calendar.MONTH, month);
                         innerCal.set(Calendar.DAY_OF_MONTH, day);
 
-                        mSelectedUserDate_start = new SimpleDateFormat("yyyy/MM/dd E요일", Locale.KOREAN).format(innerCal.getTime());
+                        mSelectedUserDate_start = new SimpleDateFormat("yyyy/MM/dd (EE)", Locale.KOREAN).format(innerCal.getTime());
                         mTvDate_start.setText(mSelectedUserDate_start);
 
                     }
@@ -142,7 +142,7 @@ public class DiaryDetailActivity extends AppCompatActivity implements View.OnCli
                         innerCal2.set(Calendar.MONTH, month);
                         innerCal2.set(Calendar.DAY_OF_MONTH, day);
 
-                        mSelectedUserDate_end = new SimpleDateFormat("yyyy/MM/dd E요일", Locale.KOREAN).format(innerCal2.getTime());
+                        mSelectedUserDate_end = new SimpleDateFormat("yyyy/MM/dd (EE)", Locale.KOREAN).format(innerCal2.getTime());
                         mTvDate_end.setText(mSelectedUserDate_end);
 
                     }
