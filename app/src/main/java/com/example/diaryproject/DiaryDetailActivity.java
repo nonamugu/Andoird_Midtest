@@ -23,21 +23,23 @@ import java.util.Locale;
 
 public class DiaryDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView mTvDate;                   // 일시 설정 텍스트
+    private TextView mTvDate_start, mTvDate_end;                   // 일시 설정 텍스트
     private EditText mEtTitle, mEtContent;      // 일기 제목, 일기 내용
     private RadioGroup mRgWeather;
 
-    private String mDetailMode = "";            // intent로 받아낸 게시글 모드
-    private String mBeforeDate = "";            // intent로 받아낸 게시글 기준 작성 일자
-    private String mSelectedUserDate = "";      // 선택된 일시 값
-    private int mSelectiveWeatherType = -1;     // 선택된 날씨 값(1 ~ 4)
+    private String mDetailMode = "";                    // intent로 받아낸 게시글 모드
+    private String mBeforeDate = "";                    // intent로 받아낸 게시글 기준 작성 일자
+    private String mSelectedUserDate_start = "";        // 선택된 일시 값
+    private String mSelectedUserDate_end = "";          // 선택된 일시 값
+    private int mSelectiveWeatherType = -1;             // 선택된 날씨 값(1 ~ 4)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_detail);
 
-        mTvDate = findViewById(R.id.tv_date);                   // 일시 설정 텍스트
+        mTvDate_start = findViewById(R.id.tv_date);             // 일시 설정 텍스트
+        mTvDate_end = findViewById(R.id.tv_date2);
         mEtTitle = findViewById(R.id.et_title);                 // 제목 입력필드
         mEtContent = findViewById(R.id.et_content);             // 내용 입력필드
         mRgWeather = findViewById(R.id.rg_weather);             // 날씨 선택 라디오 그룹
@@ -45,13 +47,17 @@ public class DiaryDetailActivity extends AppCompatActivity implements View.OnCli
         ImageView iv_back = findViewById(R.id.iv_back);         // 뒤로가기 버튼
         ImageView iv_check = findViewById(R.id.iv_check);       // 작성완료 버튼
 
-        mTvDate.setOnClickListener(this);       // 클릭 가능 부여
-        iv_back.setOnClickListener(this);       // 클릭 가능 부여
-        iv_check.setOnClickListener(this);      // 클릭 가능 부여
+        mTvDate_start.setOnClickListener(this);     // 클릭 가능 부여
+        mTvDate_end.setOnClickListener(this);       // 클릭 가능 부여
+        iv_back.setOnClickListener(this);           // 클릭 가능 부여
+        iv_check.setOnClickListener(this);          // 클릭 가능 부여
 
         // 기본으로 설정된 날씨의 값을 지정 (디바이스 현재 시간 기준)
-        mSelectedUserDate = new SimpleDateFormat("yyyy/MM/dd E요일", Locale.KOREA).format(new Date());
-        mTvDate.setText(mSelectedUserDate);
+        mSelectedUserDate_start = new SimpleDateFormat("yyyy/MM/dd E요일", Locale.KOREA).format(new Date());
+        mTvDate_start.setText(mSelectedUserDate_start);
+
+        mSelectedUserDate_end = new SimpleDateFormat("yyyy/MM/dd E요일", Locale.KOREA).format(new Date());
+        mTvDate_end.setText(mSelectedUserDate_end);
 
     }
 
@@ -89,7 +95,8 @@ public class DiaryDetailActivity extends AppCompatActivity implements View.OnCli
 
                 String title = mEtTitle.getText().toString();       // 제목 입력 값
                 String content = mEtTitle.getText().toString();     // 내용 입력 값
-                String userDate = mSelectedUserDate;                // 사용자가 선택한 일시
+                String userDate = mSelectedUserDate_start;          // 사용자가 선택한 일시
+                String userDate2 = mSelectedUserDate_end;           // 사용자가 선택한 일시
 
                 String writeDate = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.KOREAN).format(new Date());
 
@@ -114,12 +121,33 @@ public class DiaryDetailActivity extends AppCompatActivity implements View.OnCli
                         innerCal.set(Calendar.MONTH, month);
                         innerCal.set(Calendar.DAY_OF_MONTH, day);
 
-                        mSelectedUserDate = new SimpleDateFormat("yyyy/MM/dd E요일", Locale.KOREAN).format(innerCal.getTime());
-                        mTvDate.setText(mSelectedUserDate);
+                        mSelectedUserDate_start = new SimpleDateFormat("yyyy/MM/dd E요일", Locale.KOREAN).format(innerCal.getTime());
+                        mTvDate_start.setText(mSelectedUserDate_start);
 
                     }
-                }, calendar.get(Calendar.YEAR), calendar.get(calendar.MONTH), calendar.get(calendar.DATE));
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE));
                 dialog.show();      // 다이얼로그 (팝업) 활성화!
+
+                break;
+
+            case R.id.tv_date2:
+
+                Calendar calendar2 = Calendar.getInstance();
+                DatePickerDialog dialog2 = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        // 달력에 선택 된 (년, 월, 일)을 가지고와서 다시 캘린더 함수에 넣어줘서 사용자가 선택한 요일을 알아낸다.
+                        Calendar innerCal2 = Calendar.getInstance();
+                        innerCal2.set(Calendar.YEAR, year);
+                        innerCal2.set(Calendar.MONTH, month);
+                        innerCal2.set(Calendar.DAY_OF_MONTH, day);
+
+                        mSelectedUserDate_end = new SimpleDateFormat("yyyy/MM/dd E요일", Locale.KOREAN).format(innerCal2.getTime());
+                        mTvDate_end.setText(mSelectedUserDate_end);
+
+                    }
+                }, calendar2.get(Calendar.YEAR), calendar2.get(Calendar.MONTH), calendar2.get(Calendar.DATE));
+                dialog2.show();      // 다이얼로그 (팝업) 활성화!
 
                 break;
 
