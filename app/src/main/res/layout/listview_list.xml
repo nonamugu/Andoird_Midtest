@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="@android:color/white"
+    android:orientation="horizontal" >
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*">
+
+        <TableRow
+            android:background="#00ff00">
+
+            <EditText
+                android:id="@+id/editText1"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="3dp"
+                android:layout_marginBottom="1dp"
+                android:textColor="@android:color/black"
+                android:textAlignment="center"/>
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_height="wrap_content"
+                android:layout_span="5"
+                android:background="@color/white"
+                android:padding="3dp"
+                android:layout_marginBottom="1dp"
+                android:textColor="@android:color/black"
+                android:textAlignment="center"/>
+
+            <EditText
+                android:id="@+id/editText3"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="3dp"
+                android:layout_marginBottom="1dp"
+                android:textColor="@android:color/black"
+                android:textAlignment="center"/>
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

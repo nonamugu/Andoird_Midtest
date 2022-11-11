@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.ViewHolder> {
     ArrayList<DiaryModel> mLstDiary;        // 다이어리 데이터들을 들고 있는 자료형 배열
     Context mContext;
+    DataBaseHelper mDatabaseHelper; // 데이터베이스 헬퍼 클라스
 
 
     @NonNull
@@ -26,6 +27,7 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
         // 아이템 뷰가 최초로 생성이 될 때 호출되는 곳
 
         mContext = parent.getContext();
+        mDatabaseHelper = new DataBaseHelper(mContext);
         View holder = LayoutInflater.from(mContext).inflate(R.layout.list_item_diary, parent, false);
         return new ViewHolder(holder);
     }
@@ -104,7 +106,7 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
                     // 화면 이동 및 다이어리 데이터 다음 액티비티로 전달
                     Intent diaryDetailIntent = new Intent(mContext, DiaryDetailActivity.class);
                     diaryDetailIntent.putExtra("diaryModel", diaryModel);       // 다이어리 데이터 넘기기
-                    diaryDetailIntent.putExtra("mode", "modify");         // 상세보기 모드 설정
+                    diaryDetailIntent.putExtra("mode", "detail");         // 상세보기 모드 설정
                     mContext.startActivity(diaryDetailIntent);
                 }
             });
@@ -138,19 +140,24 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
                                         mContext.startActivity(diaryDetailIntent);
                                     } else {
                                         // 삭제하기 버튼을 눌렀을 때
+                                        // delete database
+                                        mDatabaseHelper.setDeleteDiaryList(diaryModel.getWriteDate());
+                                        // dalete vi
                                         mLstDiary.remove(currentPosition);
                                         notifyItemRemoved(currentPosition);
                                     }
                                 }
                             }).show();
-
                     return false;
                 }
-           });
+            });
         }
     }
 
-    public void setSampleList(ArrayList<DiaryModel> lstDiary) {
+    public void setListInit(ArrayList<DiaryModel> lstDiary)
+    {
+        //데이터 리스트 update
         mLstDiary = lstDiary;
+        notifyDataSetChanged(); // 리스트 뷰 새로고침
     }
 }
