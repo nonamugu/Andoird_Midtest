@@ -245,32 +245,43 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="6dp"
         android:layout_marginLeft="12dp"
+        android:layout_marginTop="6dp"
         android:layout_marginRight="12dp"
-        android:orientation="horizontal">
+        android:layout_marginBottom="6dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
+            android:layout_weight="1"
             android:text="시   간"
-            android:textSize="16dp"/>
+            android:textAlignment="center"
+            android:textSize="16dp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="내   용"
-            android:textSize="16dp"/>
+            android:layout_weight="7"
+            android:text="내      용"
+            android:textAlignment="center"
+            android:textSize="16dp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
+            android:layout_weight="2"
             android:text="경   비"
-            android:textSize="16dp"/>
+            android:textAlignment="center"
+            android:textSize="16dp" />
+
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#B3B3B3"
+        android:layout_marginTop="8dp"/>
 
     <!-- content -->
     <LinearLayout
@@ -278,25 +289,18 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
+        <ListView
+            android:id="@+id/listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp">
-
-            <ListView
-                android:id="@+id/listview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="none"
-                android:background="@null" />
-
-        </LinearLayout>
+            android:scrollbars="none"
+            android:background="@null" />
 
         <!-- 추가 삭제 입력 버튼 -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <Button
                 android:layout_width="wrap_content"
